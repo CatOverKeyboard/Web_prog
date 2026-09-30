@@ -1,0 +1,103 @@
+body {
+  font-family: Arial, sans-serif;
+  color: #222222;
+  margin: 0;
+  background-color: white;
+}
+
+header {
+  font-family: "Times New Roman", Times, serif;
+  color: black;
+  font-size: 26px;
+  padding: 15px 25px;
+  background-color: lightskyblue;
+}
+
+header span {
+  margin-right: 15px;
+}
+
+header span::after {
+  content: " |";
+  color: darkblue;
+}
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.graph {
+  margin-right: 30px;
+}
+
+.graph canvas {
+  border: 1px solid lightgray;
+}
+
+form {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+form > .field {
+  margin-bottom: 12px;
+}
+
+label,
+.field-name {
+  display: block;
+  margin-bottom: 4px;
+}
+
+input,
+select {
+  padding: 5px 8px;
+  margin: 2px 0;
+  font-size: 14px;
+}
+
+#y-buttons button {
+  padding: 4px 8px;
+  margin: 2px;
+  cursor: pointer;
+}
+
+#y-buttons button.active {
+  background-color: #3399ff;
+  color: white;
+}
+
+button[type="submit"] {
+  padding: 8px 16px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+#error {
+  color: #cc0000;
+  min-height: 20px;
+  margin-bottom: 8px;
+}
+
+.results {
+  padding: 0 20px 20px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  text-align: center;
+}
+
+th {
+  background-color: #add8e6;
+}
