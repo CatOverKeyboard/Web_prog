@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторная работа 1</title>
+    <link rel="stylesheet" href="css/layout.css">
+</head>
+<body>
+
+    <header>
+        <span>Сенбете Улфинан Ассефа</span>
+        <span>P3232</span>
+        <span>Вариант 22722</span>
+    </header>
+
+    <div class="main">
+        <div class="graph">
+            <canvas id="canvas" width="400" height="400"></canvas>
+        </div>
+
+        <form id="point-form">
+            <div class="field">
+                <label for="x-input">X (-5 ... 3):</label>
+                <input type="text" id="x-input" placeholder="например: 1">
+            </div>
+
+            <div class="field">
+                <span class="field-name">Y:</span>
+                <div id="y-buttons"></div>
+            </div>
+
+            <div class="field">
+                <label for="r-select">R:</label>
+                <select id="r-select">
+                    <option value="1">1</option>
+                    <option value="1.5">1.5</option>
+                    <option value="2">2</option>
+                    <option value="2.5">2.5</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+
+            <div id="error"></div>
+
+            <button type="submit">проверить</button>
+        </form>
+    </div>
+
+    <div class="results">
+        <table id="results-table">
+            <thead>
+                <tr>
+                    <th>X</th>
+                    <th>Y</th>
+                    <th>R</th>
+                    <th>результат</th>
+                    <th>дата и время</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script src="js/util.js"></script>
+</body>
+</html>
