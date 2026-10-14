@@ -87,11 +87,15 @@ const errorBox = document.getElementById('error');
 
 const R_VALUES = [1, 1.5, 2, 2.5, 3];
 
+const X_MIN = -5;
+const X_MAX = 3;
+
 function parseX(text) {
   const cleaned = text.trim().replace(',', '.');
   if (!/^-?\d+(\.\d+)?$/.test(cleaned)) return null;
 
-  // check the range on the TEXT, so long decimals are not rounded
+ const x = Number(cleaned);
+
   const negative = cleaned.startsWith('-');
   const intPart = Number(cleaned.replace('-', '').split('.')[0]);
   if (negative ? intPart > 4 : intPart > 2) return null;
@@ -137,6 +141,7 @@ form.addEventListener('submit', event => {
   });
   saveResults(results);
   renderTable();
+  drawPoints();
 });
 
 const STORAGE_KEY = 'lab1-results';
@@ -178,12 +183,12 @@ function renderTable() {
 renderTable();
 
 function drawPoint(item) {
-  const scale = R_PX / item.r;                 
+  const scale = R_PX / item.r;               
   const px = center + Number(item.x) * scale;
-  const py = center - item.y * scale;         
+  const py = center - item.y * scale;          
 
   ctx.beginPath();
-  ctx.arc(px, py, 4, 0, 2 * Math.PI);        
+  ctx.arc(px, py, 4, 0, 2 * Math.PI);
   ctx.fillStyle = item.hit ? 'lime' : 'red';
   ctx.fill();
 }
