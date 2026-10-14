@@ -85,40 +85,51 @@ const xInput = document.getElementById('x-input');
 const rSelect = document.getElementById('r-select');
 const errorBox = document.getElementById('error');
 
+const R_VALUES = [1, 1.5, 2, 2.5, 3];
+
 function parseX(text) {
   const cleaned = text.trim().replace(',', '.');
   if (!/^-?\d+(\.\d+)?$/.test(cleaned)) return null;
-  const x = Number(cleaned);
-  if (x <= -5 || x >= 3) return null;
-  return x;
+
+  // check the range on the TEXT, so long decimals are not rounded
+  const negative = cleaned.startsWith('-');
+  const intPart = Number(cleaned.replace('-', '').split('.')[0]);
+  if (negative ? intPart > 4 : intPart > 2) return null;
+
+  return cleaned;
 }
 
 function isHit(x, y, r) {
-  if (x >= 0 && y >= 0) return x + y <= r / 2;
-  if (x <= 0 && y <= 0) return x * x + y * y <= r * r;
-  if (x >= 0 && y <= 0) return x <= r && y >= -r;
-  return false;
+  const inTriangle  = x >= 0 && y >= 0 && x + y <= r / 2;
+  const inCircle    = x <= 0 && y <= 0 && x * x + y * y <= r * r;
+  const inRectangle = x >= 0 && x <= r && y <= 0 && y >= -r;
+  return inTriangle || inCircle || inRectangle;
 }
 
 form.addEventListener('submit', event => {
   event.preventDefault();
 
-  const x = parseX(xInput.value);
+  const xText = parseX(xInput.value);
   const r = Number(rSelect.value);
 
-  if (x === null) {
+  if (xText === null) {
     errorBox.textContent = 'X должен быть числом строго от −5 до 3';
     return;
   }
-  if (selectedY === null) {
+  if (!y_values.includes(selectedY)) {
     errorBox.textContent = 'выберите значение Y';
+    return;
+  }
+  if (!R_VALUES.includes(r)) {
+    errorBox.textContent = 'R должен быть одним из: 1, 1.5, 2, 2.5, 3';
     return;
   }
   errorBox.textContent = '';
 
+  const x = Number(xText);
   const results = loadResults();
   results.unshift({
-    x: x,
+    x: xText,
     y: selectedY,
     r: r,
     hit: isHit(x, selectedY, r),
@@ -158,7 +169,6 @@ function renderTable() {
     cells.forEach(value => {
       const td = document.createElement('td');
       td.textContent = value;
-      
       row.appendChild(td);
     });
     tbody.appendChild(row);
