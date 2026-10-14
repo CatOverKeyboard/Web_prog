@@ -178,12 +178,12 @@ function renderTable() {
 renderTable();
 
 function drawPoint(item) {
-  const scale = R_PX / item.r;                 // pixels in 1 unit
+  const scale = R_PX / item.r;                 
   const px = center + Number(item.x) * scale;
-  const py = center - item.y * scale;          // minus: canvas Y goes down
+  const py = center - item.y * scale;         
 
   ctx.beginPath();
-  ctx.arc(px, py, 4, 0, 2 * Math.PI);          // small full circle
+  ctx.arc(px, py, 4, 0, 2 * Math.PI);        
   ctx.fillStyle = item.hit ? 'lime' : 'red';
   ctx.fill();
 }
